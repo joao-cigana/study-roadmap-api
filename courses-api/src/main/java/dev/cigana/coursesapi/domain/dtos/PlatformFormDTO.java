@@ -1,8 +1,6 @@
 package dev.cigana.coursesapi.domain.dtos;
 
-
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,11 +10,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TopicFormDTO {
+public class PlatformFormDTO {
 
-    @NotBlank(message = "Field 'name' must be informed.")
+    @NotBlank(message = "Field 'name' must be informed")
     private String name;
 
-    private String imageLink;
+    @NotBlank(message = "Field 'platform link' must be informed")
+    private String platformLink;
+
+    private String platformImageLink;
 
 }

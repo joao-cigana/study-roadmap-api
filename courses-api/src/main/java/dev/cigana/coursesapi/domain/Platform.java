@@ -1,6 +1,7 @@
 package dev.cigana.coursesapi.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import dev.cigana.coursesapi.domain.dtos.PlatformFormDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,12 +29,16 @@ public class Platform {
     @Column(unique = true, nullable = false)
     private String platformLink;
 
-    private String platformImage;
+    private String platformImageLink;
 
     @OneToMany(mappedBy="platform")
     @JsonIgnore
     private Set<Course> courses = new HashSet<>();
 
-
+    public Platform(PlatformFormDTO dto){
+        this.name = dto.getName();
+        this.platformLink = dto.getPlatformLink();
+        this.platformImageLink = dto.getPlatformImageLink();
+    }
 
 }

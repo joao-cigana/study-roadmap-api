@@ -36,10 +36,11 @@ public class TopicService {
     }
 
     public void update(Topic topic){
-        if(!topicRepository.existsById(topic.getId())){
-            throw new ResourceNotFoundException(NOT_FOUND + topic.getId());
-        }
-        topicRepository.save(topic);
+        Topic updatedTopic = topicRepository.findById(topic.getId())
+                .orElseThrow(() -> new ResourceNotFoundException(NOT_FOUND + topic.getId()));
+        updatedTopic.setName(topic.getName());
+        updatedTopic.setImageLink(topic.getImageLink());
+        topicRepository.save(updatedTopic);
     }
 
     public void delete(UUID id){

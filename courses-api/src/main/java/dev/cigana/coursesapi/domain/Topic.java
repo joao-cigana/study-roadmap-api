@@ -1,8 +1,11 @@
 package dev.cigana.coursesapi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import dev.cigana.coursesapi.domain.dtos.TopicFormDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -25,11 +28,17 @@ public class Topic {
 
     private String imageLink;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "course-topic",
             joinColumns = @JoinColumn(name = "topic_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private Set<Course> courses;
+    private Set<Course> courses = new HashSet<>();
+
+    public Topic(TopicFormDTO dto){
+        this.name = dto.getName();
+        this.imageLink = dto.getImageLink();
+    }
 
 }

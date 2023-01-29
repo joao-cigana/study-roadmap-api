@@ -1,8 +1,10 @@
 package dev.cigana.coursesapi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -29,7 +31,8 @@ public class Platform {
     private String platformImage;
 
     @OneToMany(mappedBy="platform")
-    private Set<Course> courses;
+    @JsonIgnore
+    private Set<Course> courses = new HashSet<>();
 
 
 

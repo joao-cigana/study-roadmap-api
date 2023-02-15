@@ -2,7 +2,6 @@ package dev.cigana.coursesapi.controllers;
 
 import dev.cigana.coursesapi.domain.Topic;
 import dev.cigana.coursesapi.domain.dtos.TopicFormDTO;
-import dev.cigana.coursesapi.repositories.TopicRepository;
 import dev.cigana.coursesapi.services.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -51,7 +50,7 @@ public class TopicController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Topic> deleteById(@PathVariable UUID id){
         topicService.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build() ;
     }
 
 }

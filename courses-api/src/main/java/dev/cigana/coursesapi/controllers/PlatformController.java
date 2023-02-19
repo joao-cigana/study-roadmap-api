@@ -3,6 +3,7 @@ package dev.cigana.coursesapi.controllers;
 import dev.cigana.coursesapi.domain.Platform;
 import dev.cigana.coursesapi.domain.dtos.PlatformFormDTO;
 import dev.cigana.coursesapi.services.PlatformService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +32,7 @@ public class PlatformController {
     }
 
     @PostMapping
-    public ResponseEntity<Platform> create(@RequestBody PlatformFormDTO dto){
+    public ResponseEntity<Platform> create(@RequestBody @Valid PlatformFormDTO dto){
         Platform newPlatform = platformService.create(dto);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -42,7 +43,7 @@ public class PlatformController {
     }
 
     @PutMapping
-    public ResponseEntity<Platform> update(@RequestBody Platform platform){
+    public ResponseEntity<Platform> update(@RequestBody @Valid Platform platform){
         platformService.update(platform);
         return ResponseEntity.noContent().build();
     }

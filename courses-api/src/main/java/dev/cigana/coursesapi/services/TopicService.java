@@ -38,7 +38,7 @@ public class TopicService {
     public void update(Topic topic){
         Topic updatedTopic = topicRepository.findById(topic.getId())
                 .orElseThrow(() -> new ResourceNotFoundException(NOT_FOUND + topic.getId()));
-        updatedTopic.setName(topic.getName());
+        updatedTopic.setName(topic.getName().toUpperCase());
         updatedTopic.setImageLink(topic.getImageLink());
         topicRepository.save(updatedTopic);
     }

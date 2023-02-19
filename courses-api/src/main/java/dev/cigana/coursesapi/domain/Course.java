@@ -1,10 +1,14 @@
 package dev.cigana.coursesapi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import dev.cigana.coursesapi.domain.dtos.CourseFormDTO;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -32,11 +36,24 @@ public class Course {
 
     private String certificateLink;
 
-    @ManyToMany(mappedBy = "courses", fetch = FetchType.EAGER)
-    private Set<Topic> topics;
+    @ManyToMany
+    @JoinTable(
+            name = "course_topic",
+            joinColumns = @JoinColumn(name = "topic_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id"))
+    private Set<Topic> topics = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name="platform_id", nullable=false)
     private Platform platform;
+
+    public Course(CourseFormDTO dto){
+        this.name = dto.getName();
+        this.courseLink = dto.getCourseLink();
+        this.certificateLink = dto.getCertificateLink();
+        this.conclusionDate = dto.getConclusionDate();
+        this.platform = dto.getPlatform();
+        this.topics.addAll(dto.getTopics());
+    }
 
 }

@@ -3,6 +3,7 @@ package dev.cigana.coursesapi.controllers;
 import dev.cigana.coursesapi.domain.Topic;
 import dev.cigana.coursesapi.domain.dtos.TopicFormDTO;
 import dev.cigana.coursesapi.services.TopicService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +32,7 @@ public class TopicController {
     }
 
     @PostMapping
-    public ResponseEntity<Topic> create(@RequestBody TopicFormDTO dto){
+    public ResponseEntity<Topic> create(@RequestBody @Valid TopicFormDTO dto){
         Topic newTopic = topicService.create(dto);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -42,7 +43,7 @@ public class TopicController {
     }
 
     @PutMapping
-    public ResponseEntity<Topic> update(@RequestBody Topic topic){
+    public ResponseEntity<Topic> update(@RequestBody @Valid Topic topic){
         topicService.update(topic);
         return ResponseEntity.noContent().build();
     }

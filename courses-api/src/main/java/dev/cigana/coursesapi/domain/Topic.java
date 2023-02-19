@@ -29,11 +29,7 @@ public class Topic {
     private String imageLink;
 
     @JsonIgnore
-    @ManyToMany
-    @JoinTable(
-            name = "course-topic",
-            joinColumns = @JoinColumn(name = "topic_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id"))
+    @ManyToMany(mappedBy = "topics", fetch = FetchType.EAGER)
     private Set<Course> courses = new HashSet<>();
 
     public Topic(TopicFormDTO dto){

@@ -40,18 +40,18 @@ public class CourseService {
         return courseRepository.findAll(pageable);
     }
 
-    public Page<Course> findByPlatform(Pageable pageable, UUID platformID){
-        if(!platformRepository.existsById(platformID)){
-                throw new ResourceNotFoundException(PLATFORM_NOT_FOUND + platformID);
+    public Page<Course> findByPlatform(UUID platformId, Pageable pageable){
+        if(!platformRepository.existsById(platformId)){
+                throw new ResourceNotFoundException(PLATFORM_NOT_FOUND + platformId);
         }
-        return courseRepository.findByPlatformId(pageable, platformID);
+        return courseRepository.findByPlatformId(platformId, pageable);
     }
 
-    public Page<Course> findByTopic(Pageable pageable, UUID topicID){
-        if (!platformRepository.existsById(topicID)){
-            throw new ResourceNotFoundException(TOPIC_NOT_FOUND + topicID);
+    public Page<Course> findByTopic(UUID topicId, Pageable pageable){
+        if (!topicRepository.existsById(topicId)){
+            throw new ResourceNotFoundException(TOPIC_NOT_FOUND + topicId);
         }
-        return courseRepository.findByTopicsId(pageable, topicID);
+        return courseRepository.findByTopicsId(topicId, pageable);
     }
 
     public Course create(CourseFormDTO dto){

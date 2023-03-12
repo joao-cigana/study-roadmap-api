@@ -7,13 +7,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course, UUID> {
 
-    Page<Course> findByPlatformId(Pageable pageable, UUID platformId);
+    Page<Course> findByPlatformId(UUID platformId, Pageable pageable);
 
-    Page<Course> findByTopicsId(Pageable pageable, UUID topicId);
+    Page<Course> findByTopicsId(UUID topicId, Pageable pageable);
 
 }
